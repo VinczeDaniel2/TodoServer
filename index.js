@@ -20,7 +20,7 @@ app.use(cors())
 app.get('/todos',async (req,res)=>{
     try {
         const sql = 'SELECT * FROM todos order by timestamp desc'
-        const [rows,fields]=await connection.execute(sql)
+        const [rows,fields]=await connection.query(sql)
 
         console.log(rows,fields);
         res.send(rows)

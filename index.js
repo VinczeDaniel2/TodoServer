@@ -36,7 +36,7 @@ app.post('/todos',async (req,res)=>{
     try {
         const sql = 'insert into todos (task) VALUES (?)'
         const values=[task]
-        const [rows,fields]=await connection.execute(sql,values)
+        const [rows,fields]=await connection.query(sql,values)
         res.send(200).json({msg:'Sikeres hozzáadás'})
         
     } catch (error) {
@@ -49,7 +49,7 @@ app.delete('/todos/:id',async (req,res)=>{
     try {
         const sql = 'DELETE FROM todos WHERE id=?'
         const values=[id]
-        const [rows,fields]=await connection.execute(sql,values)
+        const [rows,fields]=await connection.query(sql,values)
         res.send(200).json({msg:'Sikeres törlés'})
         
     } catch (error) {
@@ -62,7 +62,7 @@ app.put('/todos/:id',async (req,res)=>{
     try {
         const sql = 'UPDATE todos SET completed= NOT completed WHERE id = ?'
         const values=[id]
-        const [rows,fields]=await connection.execute(sql,values)
+        const [rows,fields]=await connection.query(sql,values)
         res.send(200).json({msg:'Sikeres módosítás'})
         
     } catch (error) {
@@ -76,7 +76,7 @@ app.put('/todos/task/:id',async (req,res)=>{
     try {
         const sql = `UPDATE todos SET task='valami más' WHERE id=?`
         const values=[task,id]
-        const [rows,fields]=await connection.execute(sql,values)
+        const [rows,fields]=await connection.query(sql,values)
         res.send(200).json({msg:'Sikeres módosítás'})
         
     } catch (error) {
